@@ -27,18 +27,19 @@ bot.hear('hello', (payload, chat) => {
     });
 });
 
-bot.on('message', (payload, chat) => {
-  const text = payload.message.text;
-  console.log("??????????????????????????????");
-  chat.say(`Echo: ${text}`);
-
-});
 
 //bot.start();
 
 // Creates the endpoint for our webhook 
 app.post('/webhook', (req, res) => {  
- 
+    
+    bot.on('message', (payload, chat) => {
+        const text = payload.message.text;
+        console.log("??????????????????????????????");
+        chat.say(`Echo: ${text}`);
+      
+      });
+
     let body = req.body;
   
     // Checks this is an event from a page subscription
