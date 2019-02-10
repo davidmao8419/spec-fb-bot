@@ -55,8 +55,9 @@ let response;
         "text": `You sent the message: "${received_message.text}". Now send me an image!`
       }
     }   
+    console.log("!!!!! ",response);
     // Sends the response message
-    callSendAPI(sender_psid, response);    
+    //callSendAPI(sender_psid, response);    
 }
 function callSendAPI(sender_psid, response) {
     // Construct the message body
