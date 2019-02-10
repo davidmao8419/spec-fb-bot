@@ -7,9 +7,27 @@ const
   app = express().use(bodyParser.json()); // creates express http server
   //request = require('request');
 
-require('./bot');
+//require('./bot');
 // Sets server port and logs message on success
 app.listen(process.env.PORT || 1337, () => console.log('webhook is listening'));
+
+'use strict';
+const BootBot = require('bootbot');
+
+const bot = new BootBot({
+  accessToken: 'EAAFV6q1mQZCIBAM47amsXEMuXEUPZAwHu33QcYYS1VOqfkWC2AZCKOWtLPnKyqLzfqYdpP1bU9ewMQqmkOpd7LzShufjIwAKhCmOyHIp34zyIhqY3P2THpqd2QtRlOL2ZBK6oANZCoQI9YkwpeJatcZBogGeoSFYRKbL1KfkjJa1chhZCM4Kihz',
+  verifyToken: 'testing',
+  appSecret: '1076a355abf1df7533250276d151be84'
+});
+
+bot.on('message', (payload, chat) => {
+  const text = payload.message.text;
+  console.log("??????????????????????????????");
+  chat.say(`Echo: ${text}`);
+
+});
+
+bot.start();
 
 // Creates the endpoint for our webhook 
 app.post('/webhook', (req, res) => {  
