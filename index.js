@@ -5,9 +5,10 @@ const
   express = require('express'),
   bodyParser = require('body-parser'),
   app = express().use(bodyParser.json()); // creates express http server
-  https = require('https');
 
-  const BootBot = require('bootbot');
+
+const request = require('request');
+const BootBot = require('bootbot');
 
   const bot = new BootBot({
     accessToken: 'EAAFV6q1mQZCIBAM47amsXEMuXEUPZAwHu33QcYYS1VOqfkWC2AZCKOWtLPnKyqLzfqYdpP1bU9ewMQqmkOpd7LzShufjIwAKhCmOyHIp34zyIhqY3P2THpqd2QtRlOL2ZBK6oANZCoQI9YkwpeJatcZBogGeoSFYRKbL1KfkjJa1chhZCM4Kihz',
@@ -80,22 +81,6 @@ app.post('/webhook', (req, res) => {
   }
 
   function callSendAPI(sender_psid, response) {
-    // Construct the message body
-    let request_body = {
-      "recipient": {
-        "id": sender_psid
-      },
-      "message": response
-    }
-    
-    const options = {
-        "uri": "https://graph.facebook.com/v2.6/me/messages",
-        "qs": { "access_token": PAGE_ACCESS_TOKEN },
-        "method": "POST",
-        "json": request_body
-    };
-
-    //https.request(options, )
 
     // Send the HTTP request to the Messenger Platform
     request({
