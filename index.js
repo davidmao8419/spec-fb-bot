@@ -73,6 +73,23 @@ app.post('/webhook', (req, res) => {
       response = {
         "text": `You sent the message: "${received_message.text}". Now send me an image!`
       }
+      response = {
+        "attachment":{
+            "type":"template",
+            "payload":{
+              "template_type":"button",
+              "text":"Try the URL button!",
+              "buttons":[
+                {
+                  "type":"web_url",
+                  "url":"https://www.messenger.com/",
+                  "title":"URL Button",
+                  "webview_height_ratio": "full"
+                }
+              ]
+            }
+          }
+        }
     }  
     
     // Sends the response message
