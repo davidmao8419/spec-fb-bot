@@ -87,8 +87,8 @@ app.post('/webhook', (req, res) => {
         "recipient": {
         "id": sender_psid
         },
-        //"message": response
-        messaging_type: 'RESPONSE'
+        "message": response
+        //messaging_type: 'RESPONSE'
     }
 
     // Send the HTTP request to the Messenger Platform
