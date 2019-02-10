@@ -16,9 +16,9 @@ const
   });
 //require('./bot');
 // Sets server port and logs message on success
-//app.listen(process.env.PORT || 1337, () => console.log('webhook is listening'));
+app.listen(process.env.PORT || 1337, () => console.log('webhook is listening'));
 
-app.listen(process.env.PORT || 1337, () => bot.start());
+//app.listen(process.env.PORT || 1337, () => bot.start());
 
 bot.hear('hello', (payload, chat) => {
     console.log("??????????????????????????????@@@@");
@@ -27,18 +27,15 @@ bot.hear('hello', (payload, chat) => {
     });
 });
 
-
-//bot.start();
+bot.on('message', (payload, chat) => {
+    const text = payload.message.text;
+    console.log("??????????????????????????????");
+    chat.say(`Echo: ${text}`);
+  
+  });
 
 // Creates the endpoint for our webhook 
 app.post('/webhook', (req, res) => {  
-    
-    bot.on('message', (payload, chat) => {
-        const text = payload.message.text;
-        console.log("??????????????????????????????");
-        chat.say(`Echo: ${text}`);
-      
-      });
 
     let body = req.body;
   
@@ -103,3 +100,5 @@ app.get('/webhook', (req, res) => {
       }
     }
   });
+  
+  bot.start()
