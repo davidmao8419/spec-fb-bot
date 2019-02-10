@@ -18,7 +18,7 @@ const
 //require('./bot');
 // Sets server port and logs message on success
 
-//app.listen(process.env.PORT || 1337, () => console.log('webhook is listening'));
+app.listen(process.env.PORT || 3000, () => console.log('webhook is listening'));
 
 bot.on('message', (payload, chat) => {
     console.log('A text message was received!');
