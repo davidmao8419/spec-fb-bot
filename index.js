@@ -14,17 +14,14 @@ const
     verifyToken: 'testing',
     appSecret: '1076a355abf1df7533250276d151be84'
   });
-  //bot.start()
+  bot.start()
 //require('./bot');
 // Sets server port and logs message on success
-app.listen(process.env.PORT || 1337, () => console.log('webhook is listening'));
 
+//app.listen(process.env.PORT || 1337, () => console.log('webhook is listening'));
 
 bot.on('message', (payload, chat) => {
-    const text = payload.message.text;
-    console.log("??????????????????????????????");
-    chat.say(`Echo: ${text}`);
-  
+    console.log('A text message was received!');
   });
 
 // Creates the endpoint for our webhook 
