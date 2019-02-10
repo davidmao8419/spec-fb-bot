@@ -20,6 +20,12 @@ const
 
 app.listen(process.env.PORT || 1337, () => bot.start());
 
+bot.hear('hello', (payload, chat) => {
+    console.log("??????????????????????????????@@@@");
+    chat.getUserProfile().then((user) => {
+      chat.say(`Hello, ${user.first_name}!`);
+    });
+});
 
 bot.on('message', (payload, chat) => {
   const text = payload.message.text;
