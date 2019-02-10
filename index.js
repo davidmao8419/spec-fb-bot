@@ -77,15 +77,23 @@ app.post('/webhook', (req, res) => {
     
     // Sends the response message
     console.log("!! The response will be ", response);
-    //callSendAPI(sender_psid, response);    
+    callSendAPI(sender_psid, response);    
   }
 
   function callSendAPI(sender_psid, response) {
 
+    // Construct the message body
+    let request_body = {
+        "recipient": {
+        "id": sender_psid
+        },
+        "message": response
+    }
+
     // Send the HTTP request to the Messenger Platform
     request({
       "uri": "https://graph.facebook.com/v2.6/me/messages",
-      "qs": { "access_token": PAGE_ACCESS_TOKEN },
+      "qs": { "access_token": 'EAAFV6q1mQZCIBAM47amsXEMuXEUPZAwHu33QcYYS1VOqfkWC2AZCKOWtLPnKyqLzfqYdpP1bU9ewMQqmkOpd7LzShufjIwAKhCmOyHIp34zyIhqY3P2THpqd2QtRlOL2ZBK6oANZCoQI9YkwpeJatcZBogGeoSFYRKbL1KfkjJa1chhZCM4Kihz' },
       "method": "POST",
       "json": request_body
     }, (err, res, body) => {
