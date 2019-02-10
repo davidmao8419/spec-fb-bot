@@ -5,8 +5,7 @@ const
   express = require('express'),
   bodyParser = require('body-parser'),
   app = express().use(bodyParser.json()); // creates express http server
-  //request = require('request');
-  request = require('http').request;
+  https = require('https');
 
   const BootBot = require('bootbot');
 
@@ -80,7 +79,38 @@ app.post('/webhook', (req, res) => {
     //callSendAPI(sender_psid, response);    
   }
 
+  function callSendAPI(sender_psid, response) {
+    // Construct the message body
+    let request_body = {
+      "recipient": {
+        "id": sender_psid
+      },
+      "message": response
+    }
+    
+    const options = {
+        "uri": "https://graph.facebook.com/v2.6/me/messages",
+        "qs": { "access_token": PAGE_ACCESS_TOKEN },
+        "method": "POST",
+        "json": request_body
+    };
 
+    //https.request(options, )
+
+    // Send the HTTP request to the Messenger Platform
+    request({
+      "uri": "https://graph.facebook.com/v2.6/me/messages",
+      "qs": { "access_token": PAGE_ACCESS_TOKEN },
+      "method": "POST",
+      "json": request_body
+    }, (err, res, body) => {
+      if (!err) {
+        console.log('message sent!')
+      } else {
+        console.error("Unable to send message:" + err);
+      }
+    }); 
+  }
 
   // Adds support for GET requests to our webhook
 app.get('/webhook', (req, res) => {
