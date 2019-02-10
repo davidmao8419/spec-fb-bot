@@ -43,13 +43,14 @@ app.post('/webhook', (req, res) => {
         let sender_psid = webhook_event.sender.id;
         console.log('Sender PSID: ' + sender_psid);
         console.log("so weird");
-        /*
+        
         if (webhook_event.message) {
             handleMessage(sender_psid, webhook_event.message);        
           } else if (webhook_event.postback) {
-            handlePostback(sender_psid, webhook_event.postback);
+            console.log("no message");
+            //handlePostback(sender_psid, webhook_event.postback);
           }
-          */
+        
       });
   
       // Returns a '200 OK' response to all requests
@@ -58,9 +59,25 @@ app.post('/webhook', (req, res) => {
       // Returns a '404 Not Found' if event is not from a page subscription
       res.sendStatus(404);
     }
-  
   });
 
+  function handleMessage(sender_psid, received_message) {
+
+    let response;
+  
+    // Check if the message contains text
+    if (received_message.text) {    
+  
+      // Create the payload for a basic text message
+      response = {
+        "text": `You sent the message: "${received_message.text}". Now send me an image!`
+      }
+    }  
+    
+    // Sends the response message
+    console.log("!! The response will be ", response);
+    //callSendAPI(sender_psid, response);    
+  }
 
 
 
