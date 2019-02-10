@@ -78,12 +78,12 @@ app.post('/webhook', (req, res) => {
             "type":"template",
             "payload":{
               "template_type":"button",
-              "text":"Try the URL button!",
+              "text":"Connect to Google Calendar!",
               "buttons":[
                 {
                   "type":"web_url",
                   "url":"https://www.messenger.com/",
-                  "title":"URL Button",
+                  "title":"Connect!!",
                   "webview_height_ratio": "full"
                 }
               ]
