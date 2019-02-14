@@ -77,7 +77,7 @@ app.post('/webhook', (req, res) => {
         'https://fbbot-davidmao.herokuapp.com/connect/callback'
     )
     // ** Generate the url that will be used for the consent dialog.
-    url = oauth2Client.generateAuthUrl({
+    let url = oauth2Client.generateAuthUrl({
         access_type: 'offline',
         prompt: 'consent',
         scope: [
