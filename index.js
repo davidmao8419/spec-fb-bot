@@ -50,8 +50,8 @@ app.post('/webhook', (req, res) => {
         if (webhook_event.message) {
             handleMessage(sender_psid, webhook_event.message);        
           } else if (webhook_event.postback) {
-            console.log("Helloooooo your ID is ", sender_psid);
-            linkToGoogleCalendar(sender_psid);
+            //console.log("Helloooooo your ID is ", sender_psid);
+            //linkToGoogleCalendar(sender_psid);
             //handlePostback(sender_psid, webhook_event.postback);
           }
         
