@@ -198,7 +198,7 @@ app.get('/connect/callback', function(req, res) {
             "type":"template",
             "payload":{
               "template_type":"button",
-              "text":"Connect to Google Calendar! Then I will nudge every morning at 7am :)",
+              "text":"Connect to Google Calendar! Then I will nudge every morning at 7am.",
               "buttons":[
                 {
                   "type":"web_url",
