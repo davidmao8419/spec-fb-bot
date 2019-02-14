@@ -112,14 +112,15 @@ app.get('/connect/callback', function(req, res) {
           let auth_id = JSON.parse(decodeURIComponent(req.query.state));
           var newUser = new User({
             token: tokens,
-            facebookID: facebookID, //TODO: ALSO store slackname so that you can easily add your own meetings to your calendars too
+            //facebookID: facebookID, //TODO: ALSO store slackname so that you can easily add your own meetings to your calendars too
             auth_id: auth_id.auth_id,
             email: tempEmail,
             pendingInvites: []
         });
         newUser.save()
                     .then( () => {
-                        res.status(200).send("Your account was successfuly authenticated")
+                        res.status(200).send("Your account was successfuly authenticated");
+                        linkSuccessMessage(auth_id.auth_id, "You successfully connect to Google Calendar! Now I will remind you 7am everyday!");
                         //rtm.sendMessage("You've successfully connect to your Google calendar", channelID)
                     })
                     .catch((err) => {
@@ -173,6 +174,13 @@ app.get('/connect/callback', function(req, res) {
         console.error("HELOOOOOOO Unable to send message:" + err);
       }
     }); 
+  }
+
+  function linkSuccessMessage(sender_psid, received_message) {
+    var response = {
+      "text": received_message
+    }
+    callSendAPI(sender_psid, response);
   }
 
   function handleMessage(sender_psid, received_message) {
