@@ -52,8 +52,7 @@ app.post('/webhook', (req, res) => {
         if (webhook_event.message) {
             handleMessage(sender_psid, webhook_event.message);        
           } else if (webhook_event.postback) {
-            console.log("no message");
-            console.log("go go go go go ");
+            console.log("go go go go go HAHAHAHA");
             //handlePostback(sender_psid, webhook_event.postback);
           }
         
@@ -69,12 +68,11 @@ app.post('/webhook', (req, res) => {
 
   function greeting() {
     let request_body = {
-      /*
+      
       "greeting": [
         {"locale":"default",
         "text":"Hello!"}
-      ]
-      */
+      ],
       "get_started":{
         "payload":"Click here to link to your Google Calendar!!"
       }
