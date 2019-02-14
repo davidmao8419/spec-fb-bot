@@ -16,19 +16,11 @@ var FB_PAGE_TOKEN = process.env.FB_PAGE_TOKEN;
 mongoose.connect(process.env.MONGODB_URI,{ useNewUrlParser: true });
 mongoose.Promise = global.Promise;
 
-  const bot = new BootBot({
-    accessToken: 'EAAFV6q1mQZCIBAM47amsXEMuXEUPZAwHu33QcYYS1VOqfkWC2AZCKOWtLPnKyqLzfqYdpP1bU9ewMQqmkOpd7LzShufjIwAKhCmOyHIp34zyIhqY3P2THpqd2QtRlOL2ZBK6oANZCoQI9YkwpeJatcZBogGeoSFYRKbL1KfkjJa1chhZCM4Kihz',
-    verifyToken: 'testing',
-    appSecret: '1076a355abf1df7533250276d151be84'
-  });
 
 //app.listen(process.env.PORT || 1337, () => console.log('webhook is listening'));
 app.listen(process.env.PORT || 1337, () => greeting());
 
 // Creates the endpoint for our webhook 
-app.post('./get_started', (req, res) => {
-  console.log("helooooooooooo");
-});
 app.post('/webhook', (req, res) => {  
 
     let body = req.body;
