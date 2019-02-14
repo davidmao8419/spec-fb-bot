@@ -30,8 +30,8 @@ bot.on('message', (payload, chat) => {
 app.post('/webhook', (req, res) => {  
 
     let body = req.body;
-    console.log(req);
     // Checks this is an event from a page subscription
+    console.log("!!!!!!! ", body.object);
     if (body.object === 'page') {
       console.log(body);
       // Iterates over each entry - there may be multiple if batched
