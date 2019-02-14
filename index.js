@@ -46,12 +46,11 @@ app.post('/webhook', (req, res) => {
         
         //TODO: to see whether the user already connects to the google calendar
         if (webhook_event.message) {
-            handleMessage(sender_psid, webhook_event.message);        
+            //handleMessage(sender_psid, webhook_event.message);
+            googleCalButton(sender_psid)        
           } else if (webhook_event.postback) {
-            handleMessage(sender_psid, webhook_event.message);  
-            //console.log("Helloooooo your ID is ", sender_psid);
-            //linkToGoogleCalendar(sender_psid);
-            //handlePostback(sender_psid, webhook_event.postback);
+            googleCalButton(sender_psid);
+            //handlePostback(sender_psid, webhook_event.postback)
           }
         
       });
@@ -134,22 +133,6 @@ app.get('/connect/callback', function(req, res) {
   });
 })
 
-  function linkToGoogleCalendar(sender_psid) {
-    //https://fbbot-davidmao.herokuapp.com/
-    request({
-      "uri": "https://fbbot-davidmao.herokuapp.com/oauth",
-      "qs": { "auth_id": sender_psid },
-      "method": "POST"
-    }, (err, res, body) => {
-      if (!err) {
-        
-        //console.log('link to google calendar success')
-      } else {
-        console.error("google calendar " + err);
-      }
-    }); 
-  }
-
   function greeting() {
     let request_body = {
       
@@ -182,6 +165,28 @@ app.get('/connect/callback', function(req, res) {
     callSendAPI(sender_psid, response);
   }
 
+  function googleCalButton(sender_psid) {
+    let url = process.env.DOMAIN + '/oauth?auth_id='+sender_psid;
+    let response = {
+      "attachment":{
+          "type":"template",
+          "payload":{
+            "template_type":"button",
+            "text":"Connect to Google Calendar! Then I will nudge every morning at 7am :)",
+            "buttons":[
+              {
+                "type":"web_url",
+                "url": url,
+                "title":"Connect!!",
+                "webview_height_ratio": "full"
+              }
+            ]
+          }
+        }
+      }
+      callSendAPI(sender_psid, response);
+  }
+
   function handleMessage(sender_psid, received_message) {
 
     let response;
@@ -192,28 +197,8 @@ app.get('/connect/callback', function(req, res) {
       // Create the payload for a basic text message
       response = {
         "text": `You sent the message: "${received_message.text}". Now send me an image!`
-      }
-      response = {
-        "attachment":{
-            "type":"template",
-            "payload":{
-              "template_type":"button",
-              "text":"Connect to Google Calendar! Then I will nudge every morning at 7am.",
-              "buttons":[
-                {
-                  "type":"web_url",
-                  "url": url,
-                  "title":"Connect!!",
-                  "webview_height_ratio": "full"
-                }
-              ]
-            }
-          }
-        }
+      } 
     }  
-    
-    // Sends the response message
-    console.log("!! The response will be ", response);
     callSendAPI(sender_psid, response);    
   }
 
