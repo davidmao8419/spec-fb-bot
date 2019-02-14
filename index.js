@@ -19,7 +19,8 @@ const BootBot = require('bootbot');
 //require('./bot');
 // Sets server port and logs message on success
 
-app.listen(process.env.PORT || 1337, () => console.log('webhook is listening'));
+//app.listen(process.env.PORT || 1337, () => console.log('webhook is listening'));
+app.listen(process.env.PORT || 1337, () => greeting());
 
 bot.on('message', (payload, chat) => {
     console.log('A text message was received!');
@@ -65,14 +66,27 @@ app.post('/webhook', (req, res) => {
   });
 
   function greeting(sender_psid) {
-    let response;
-    response = {
+    console.log("greetinggggggg");
+    let request_body = {
       "greeting": {
         "locale":"default",
         "text":"Hey there!!!!"
       }
     }
-    callSendAPI(sender_psid, response);
+    
+  // Send the HTTP request to the Messenger Platform
+  request({
+    "uri": "https://graph.facebook.com/v2.6/me/messages",
+    "qs": { "access_token": "EAAFV6q1mQZCIBAJdmxXaJIzuz4NDn1UM5QDHvCJVIwDJZBkeJIOcVVLZAUXVZBZBFZCkCQbq5rO0nN19ZAP6S4CRkrz2LlxUmgcQHZCSfw5YYgERK8x0ygHYO14ZBVcRaMkGMLZCeFn1ZAe4y1zHpRc6PZCV5xVr4lXaI4Obj14sZAZBZArz3PgZAXwRht2W" },
+    "method": "POST",
+    "json": request_body
+  }, (err, res, body) => {
+    if (!err) {
+      console.log('message sent!')
+    } else {
+      console.error("Unable to send message:" + err);
+    }
+  }); 
   }
 
   function handleMessage(sender_psid, received_message) {
