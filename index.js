@@ -69,10 +69,10 @@ app.post('/webhook', (req, res) => {
 
   function greeting() {
     let request_body = {
-      "greeting": {
-        "locale":"default",
-        "text":"Hello!"
-      }
+      "greeting": [
+        {"locale":"default",
+        "text":"Hello!"}
+      ]
     }
     request({
       "uri": "https://graph.facebook.com/v2.6/me/messenger_profile",
