@@ -7,25 +7,22 @@ const
   app = express().use(bodyParser.json()); // creates express http server
 
 const {google} = require('googleapis');
+var {User} = require('./models');
 const request = require('request');
 const BootBot = require('bootbot');
+var facebookID;
+var mongoose = require('mongoose');
+mongoose.connect(process.env.MONGODB_URI,{ useNewUrlParser: true });
+mongoose.Promise = global.Promise;
 
   const bot = new BootBot({
     accessToken: 'EAAFV6q1mQZCIBAM47amsXEMuXEUPZAwHu33QcYYS1VOqfkWC2AZCKOWtLPnKyqLzfqYdpP1bU9ewMQqmkOpd7LzShufjIwAKhCmOyHIp34zyIhqY3P2THpqd2QtRlOL2ZBK6oANZCoQI9YkwpeJatcZBogGeoSFYRKbL1KfkjJa1chhZCM4Kihz',
     verifyToken: 'testing',
     appSecret: '1076a355abf1df7533250276d151be84'
   });
-  //bot.start()
-
-//require('./bot');
-// Sets server port and logs message on success
 
 //app.listen(process.env.PORT || 1337, () => console.log('webhook is listening'));
 app.listen(process.env.PORT || 1337, () => greeting());
-
-bot.on('message', (payload, chat) => {
-    console.log('A text message was received!');
-  });
 
 // Creates the endpoint for our webhook 
 app.post('./get_started', (req, res) => {
@@ -89,12 +86,52 @@ app.post('/webhook', (req, res) => {
             auth_id: req.query.auth_id
         }))
     });
-    const userID = req.query.auth_id
+    facebookID = req.query.auth_id;
     res.redirect(url);
 })
 
 app.get('/connect/callback', function(req, res) {
-  console.log("!!!!!!!!! Google after consent: ", req.query.code);
+  const code = req.query.code;
+  let oauth2Client = new google.auth.OAuth2(
+    process.env.GOOGLE_CLIENT_ID,
+    process.env.GOOGLE_CLIENT_SECRET,
+    process.env.DOMAIN + '/connect/callback'
+  )
+  oauth2Client.getToken(code, function (err, tokens){
+    if(err) {
+      console.log(err);
+    } else {
+      oauth2Client.setCredentials(tokens);
+      var plus = google.plus('v1');
+      plus.people.get({auth: oauth2Client, userId: 'me'}, function(err, person){
+        if(err) {
+          console.log(err);
+        } else {
+          console.log("this is googleplus person object", person);
+          var tempEmail = person.data.emails[0].value;
+          let auth_id = JSON.parse(decodeURIComponent(req.query.state));
+          var newUser = new User({
+            token: tokens,
+            facebookID: facebookID, //TODO: ALSO store slackname so that you can easily add your own meetings to your calendars too
+            auth_id: auth_id.auth_id,
+            email: tempEmail,
+            pendingInvites: []
+        });
+        newUser.save()
+                    .then( () => {
+                        res.status(200).send("Your account was successfuly authenticated")
+                        //rtm.sendMessage("You've successfully connect to your Google calendar", channelID)
+                    })
+                    .catch((err) => {
+                        console.log('error in newuser save of connectcallback');
+                        res.status(400).json({error:err});
+                    });
+          console.log("!!!!!!! facebookID: ", facebookID);
+          console.log("!!!!!!! auth_id: ", auth_id.auth_id);
+        }
+      });
+    }
+  });
 })
 
   function linkToGoogleCalendar(sender_psid) {
@@ -141,7 +178,7 @@ app.get('/connect/callback', function(req, res) {
   function handleMessage(sender_psid, received_message) {
 
     let response;
-  
+    let url = 'https://fbbot-davidmao.herokuapp.com/oauth?auth_id='+sender_psid;
     // Check if the message contains text
     if (received_message.text) {    
   
@@ -158,7 +195,7 @@ app.get('/connect/callback', function(req, res) {
               "buttons":[
                 {
                   "type":"web_url",
-                  "url":"https://fbbot-davidmao.herokuapp.com/oauth?auth_id=testing",
+                  "url": url,
                   "title":"Connect!!",
                   "webview_height_ratio": "full"
                 }
