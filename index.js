@@ -44,6 +44,8 @@ app.post('/webhook', (req, res) => {
         let sender_psid = webhook_event.sender.id;
         //console.log('Sender PSID: ' + sender_psid);
         
+        greeting(sender_psid)
+        /*
         if (webhook_event.message) {
             handleMessage(sender_psid, webhook_event.message);        
           } else if (webhook_event.postback) {
@@ -51,7 +53,7 @@ app.post('/webhook', (req, res) => {
             console.log("go go go go go ");
             //handlePostback(sender_psid, webhook_event.postback);
           }
-        
+        */
       });
   
       // Returns a '200 OK' response to all requests
@@ -61,6 +63,17 @@ app.post('/webhook', (req, res) => {
       res.sendStatus(404);
     }
   });
+
+  function greeting(sender_psid) {
+    let response;
+    response = {
+      "greeting": {
+        "locale":"default",
+        "text":"Hey there!!!!"
+      }
+    }
+    callSendAPI(sender_psid, response);
+  }
 
   function handleMessage(sender_psid, received_message) {
 
