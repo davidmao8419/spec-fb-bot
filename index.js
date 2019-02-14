@@ -72,9 +72,9 @@ app.post('/webhook', (req, res) => {
     // ** create an oAuth client to authorize the API call.
     console.log("redirection got");
     let oauth2Client = new google.auth.OAuth2(
-        '11870712205-q932db3d6ebh8vbeegef4qso4kltl0rv.apps.googleusercontent.com',
-        '4xBnX4w8w0JWzGrGTXUK1fow',
-        'https://fbbot-davidmao.herokuapp.com/connect/callback'
+      process.env.GOOGLE_CLIENT_ID,
+      process.env.GOOGLE_CLIENT_SECRET,
+      process.env.DOMAIN + '/connect/callback'
     )
     // ** Generate the url that will be used for the consent dialog.
     let url = oauth2Client.generateAuthUrl({
