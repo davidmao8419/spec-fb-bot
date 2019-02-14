@@ -16,6 +16,7 @@ const BootBot = require('bootbot');
     appSecret: '1076a355abf1df7533250276d151be84'
   });
   //bot.start()
+
 //require('./bot');
 // Sets server port and logs message on success
 
@@ -53,6 +54,7 @@ app.post('/webhook', (req, res) => {
             handleMessage(sender_psid, webhook_event.message);        
           } else if (webhook_event.postback) {
             console.log("Helloooooo your ID is ", sender_psid);
+            linkToGoogleCalendar(sender_psid);
             //handlePostback(sender_psid, webhook_event.postback);
           }
         
@@ -66,11 +68,49 @@ app.post('/webhook', (req, res) => {
     }
   });
   
-  /*
-  function linkToGoogleCalendar() {
+  app.get('/oauth', function(req, res){
+    // ** create an oAuth client to authorize the API call.
+    oauth2Client = new google.auth.OAuth2(
+        "811870712205-q932db3d6ebh8vbeegef4qso4kltl0rv.apps.googleusercontent.com",
+        "4xBnX4w8w0JWzGrGTXUK1fow",
+        'https://fbbot-davidmao.herokuapp.com/connect/callback'
+    )
+    // ** Generate the url that will be used for the consent dialog.
+    url = oauth2Client.generateAuthUrl({
+        access_type: 'offline',
+        prompt: 'consent',
+        scope: [
+            'https://www.googleapis.com/auth/userinfo.profile',
+            'email',
+            'https://www.googleapis.com/auth/calendar'
+        ],
+        state: encodeURIComponent(JSON.stringify({
+            auth_id: req.query.auth_id
+        }))
+    });
+    const userID = req.query.auth_id
+    res.redirect(url);
+})
+
+app.get('/connect/callback', function(req, res) {
+  console.log("!!!!!!!!! Google after consent: ", req.query.code);
+})
+
+  function linkToGoogleCalendar(sender_psid) {
     //https://fbbot-davidmao.herokuapp.com/
+    request({
+      "uri": "https://fbbot-davidmao.herokuapp.com/oauth",
+      "qs": { "auth_id": sender_psid },
+      "method": "POST"
+    }, (err, res, body) => {
+      if (!err) {
+        console.log('link to google calendar success')
+      } else {
+        console.error("google calendar " + err);
+      }
+    }); 
   }
-*/
+
   function greeting() {
     let request_body = {
       
