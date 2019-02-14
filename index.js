@@ -49,6 +49,7 @@ app.post('/webhook', (req, res) => {
             handleMessage(sender_psid, webhook_event.message);        
           } else if (webhook_event.postback) {
             console.log("no message");
+            console.log("go go go go go ");
             //handlePostback(sender_psid, webhook_event.postback);
           }
         
