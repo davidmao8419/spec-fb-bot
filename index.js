@@ -224,7 +224,7 @@ app.get('/connect/callback', function(req, res) {
     // Send the HTTP request to the Messenger Platform
     request({
       "uri": "https://graph.facebook.com/v2.6/me/messages",
-      "qs": { "access_token": "EAAFV6q1mQZCIBAF41HvSEsqaQvqOtu5g3Ne9QNWbFBTjZCoKPWVuursrAsOMBYp05i4NeZCXKWcOwx1DZB0nuHn0jJH7eDqIUAxvS9SEX14q1RN7fGZAgxebKY0DS6r2s9sMkMmbJ6SsrsINDHmrb5EFWBlvWCWWXkvkXwZCZA33BmeXZANWEV6Yu9XAKlBhJElORaHC5eyO0AZDZD" },
+      "qs": { "access_token": "EAAFV6q1mQZCIBAA8gCUhqCfIZAh960xQzIUsLlDMD1i2a5YnZACJe1ZCF6RMlxRv42gOlasMVgf6jZBI3rEYagOPqQSKjpEjxO7UYePSZBSsrtlCCTliZA3YISYbUqCHQTFx8yPwV2IU9IzQp4xumMTmA3uZAxiJW2EZALBT8vppCKPJSebjP4JRZA" },
       "method": "POST",
       "json": request_body
     }, (err, res, body) => {
