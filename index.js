@@ -111,7 +111,7 @@ app.post('/webhook', (req, res) => {
     // Send the HTTP request to the Messenger Platform
     request({
       "uri": "https://graph.facebook.com/v2.6/me/messages",
-      "qs": { "access_token": "EAAFV6q1mQZCIBADaV5FCP43ih9c3ZAtjDa8dHE81AlyDsF9ZCd2ycoDJn24ahaZBziyZCeaC491HagfsaKYBcwhWM3xgoquj8mqHh2O2WgyHuUsaHSWdHothSuZAHZCF9vkxDsGW3obalp3gHZCVrOdZAIZBmkF2I5GOydPZClntCXivJ0ouZAMJrxGOFAZBsLOxvy1pLMwSN6WTUGAZDZD" },
+      "qs": { "access_token": "EAAFV6q1mQZCIBAJdmxXaJIzuz4NDn1UM5QDHvCJVIwDJZBkeJIOcVVLZAUXVZBZBFZCkCQbq5rO0nN19ZAP6S4CRkrz2LlxUmgcQHZCSfw5YYgERK8x0ygHYO14ZBVcRaMkGMLZCeFn1ZAe4y1zHpRc6PZCV5xVr4lXaI4Obj14sZAZBZArz3PgZAXwRht2W" },
       "method": "POST",
       "json": request_body
     }, (err, res, body) => {
