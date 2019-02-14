@@ -6,7 +6,7 @@ const
   bodyParser = require('body-parser'),
   app = express().use(bodyParser.json()); // creates express http server
 
-
+const {google} = require('googleapis');
 const request = require('request');
 const BootBot = require('bootbot');
 
@@ -65,7 +65,12 @@ app.post('/webhook', (req, res) => {
       res.sendStatus(404);
     }
   });
-
+  
+  /*
+  function linkToGoogleCalendar() {
+    //https://fbbot-davidmao.herokuapp.com/
+  }
+*/
   function greeting() {
     let request_body = {
       
