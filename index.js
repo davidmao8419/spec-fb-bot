@@ -76,7 +76,7 @@ app.post('/webhook', (req, res) => {
     }
     request({
       "uri": "https://graph.facebook.com/v2.6/me/messenger_profile",
-      "qs": { "access_token": "EAAFV6q1mQZCIBAJdmxXaJIzuz4NDn1UM5QDHvCJVIwDJZBkeJIOcVVLZAUXVZBZBFZCkCQbq5rO0nN19ZAP6S4CRkrz2LlxUmgcQHZCSfw5YYgERK8x0ygHYO14ZBVcRaMkGMLZCeFn1ZAe4y1zHpRc6PZCV5xVr4lXaI4Obj14sZAZBZArz3PgZAXwRht2W" },
+      "qs": { "access_token": "EAAFV6q1mQZCIBAF41HvSEsqaQvqOtu5g3Ne9QNWbFBTjZCoKPWVuursrAsOMBYp05i4NeZCXKWcOwx1DZB0nuHn0jJH7eDqIUAxvS9SEX14q1RN7fGZAgxebKY0DS6r2s9sMkMmbJ6SsrsINDHmrb5EFWBlvWCWWXkvkXwZCZA33BmeXZANWEV6Yu9XAKlBhJElORaHC5eyO0AZDZD" },
       "method": "POST",
       "json": request_body
     }, (err, res, body) => {
@@ -137,7 +137,7 @@ app.post('/webhook', (req, res) => {
     // Send the HTTP request to the Messenger Platform
     request({
       "uri": "https://graph.facebook.com/v2.6/me/messages",
-      "qs": { "access_token": "EAAFV6q1mQZCIBAJdmxXaJIzuz4NDn1UM5QDHvCJVIwDJZBkeJIOcVVLZAUXVZBZBFZCkCQbq5rO0nN19ZAP6S4CRkrz2LlxUmgcQHZCSfw5YYgERK8x0ygHYO14ZBVcRaMkGMLZCeFn1ZAe4y1zHpRc6PZCV5xVr4lXaI4Obj14sZAZBZArz3PgZAXwRht2W" },
+      "qs": { "access_token": "EAAFV6q1mQZCIBAF41HvSEsqaQvqOtu5g3Ne9QNWbFBTjZCoKPWVuursrAsOMBYp05i4NeZCXKWcOwx1DZB0nuHn0jJH7eDqIUAxvS9SEX14q1RN7fGZAgxebKY0DS6r2s9sMkMmbJ6SsrsINDHmrb5EFWBlvWCWWXkvkXwZCZA33BmeXZANWEV6Yu9XAKlBhJElORaHC5eyO0AZDZD" },
       "method": "POST",
       "json": request_body
     }, (err, res, body) => {
