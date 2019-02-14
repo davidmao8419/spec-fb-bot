@@ -12,6 +12,7 @@ const request = require('request');
 const BootBot = require('bootbot');
 var facebookID;
 var mongoose = require('mongoose');
+var FB_PAGE_TOKEN = process.env.FB_PAGE_TOKEN;
 mongoose.connect(process.env.MONGODB_URI,{ useNewUrlParser: true });
 mongoose.Promise = global.Promise;
 
@@ -146,7 +147,7 @@ app.get('/connect/callback', function(req, res) {
     }
     request({
       "uri": "https://graph.facebook.com/v2.6/me/messenger_profile",
-      "qs": { "access_token": "EAAFV6q1mQZCIBAA8gCUhqCfIZAh960xQzIUsLlDMD1i2a5YnZACJe1ZCF6RMlxRv42gOlasMVgf6jZBI3rEYagOPqQSKjpEjxO7UYePSZBSsrtlCCTliZA3YISYbUqCHQTFx8yPwV2IU9IzQp4xumMTmA3uZAxiJW2EZALBT8vppCKPJSebjP4JRZA" },
+      "qs": { "access_token": FB_PAGE_TOKEN },
       "method": "POST",
       "json": request_body
     }, (err, res, body) => {
@@ -216,7 +217,7 @@ app.get('/connect/callback', function(req, res) {
     // Send the HTTP request to the Messenger Platform
     request({
       "uri": "https://graph.facebook.com/v2.6/me/messages",
-      "qs": { "access_token": "EAAFV6q1mQZCIBAA8gCUhqCfIZAh960xQzIUsLlDMD1i2a5YnZACJe1ZCF6RMlxRv42gOlasMVgf6jZBI3rEYagOPqQSKjpEjxO7UYePSZBSsrtlCCTliZA3YISYbUqCHQTFx8yPwV2IU9IzQp4xumMTmA3uZAxiJW2EZALBT8vppCKPJSebjP4JRZA" },
+      "qs": { "access_token": FB_PAGE_TOKEN },
       "method": "POST",
       "json": request_body
     }, (err, res, body) => {
