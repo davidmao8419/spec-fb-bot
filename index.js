@@ -43,13 +43,12 @@ app.post('/webhook', (req, res) => {
         let webhook_event = entry.messaging[0];
         console.log(webhook_event);
         let sender_psid = webhook_event.sender.id;
-        //console.log('Sender PSID: ' + sender_psid);
         
-        //greeting(sender_psid)
-        
+        //TODO: to see whether the user already connects to the google calendar
         if (webhook_event.message) {
             handleMessage(sender_psid, webhook_event.message);        
           } else if (webhook_event.postback) {
+            handleMessage(sender_psid, webhook_event.message);  
             //console.log("Helloooooo your ID is ", sender_psid);
             //linkToGoogleCalendar(sender_psid);
             //handlePostback(sender_psid, webhook_event.postback);
@@ -199,7 +198,7 @@ app.get('/connect/callback', function(req, res) {
             "type":"template",
             "payload":{
               "template_type":"button",
-              "text":"Connect to Google Calendar!",
+              "text":"Connect to Google Calendar! Then I will nudge every morning at 7am :)",
               "buttons":[
                 {
                   "type":"web_url",
