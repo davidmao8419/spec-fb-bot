@@ -76,7 +76,7 @@ app.post('/webhook', (req, res) => {
       ]
       */
       "get_started":{
-        "payload":"<GET_STARTED_PAYLOAD>"
+        "payload":"Click here to link to your Google Calendar!!"
       }
     }
     request({
