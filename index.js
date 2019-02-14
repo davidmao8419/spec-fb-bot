@@ -81,7 +81,7 @@ app.post('/webhook', (req, res) => {
       "json": request_body
     }, (err, res, body) => {
       if (!err) {
-        console.log('HELLOOOOO  message sent!')
+        console.log('HELLOOOOOo  message sent!')
       } else {
         console.error("HELOOOOOOO Unable to send message:" + err);
       }
