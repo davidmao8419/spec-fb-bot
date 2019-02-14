@@ -104,7 +104,8 @@ app.get('/connect/callback', function(req, res) {
       "method": "POST"
     }, (err, res, body) => {
       if (!err) {
-        console.log('link to google calendar success')
+        
+        //console.log('link to google calendar success')
       } else {
         console.error("google calendar " + err);
       }
@@ -156,7 +157,7 @@ app.get('/connect/callback', function(req, res) {
               "buttons":[
                 {
                   "type":"web_url",
-                  "url":"https://www.messenger.com/",
+                  "url":"https://fbbot-davidmao.herokuapp.com/oauth?auth_id=testing",
                   "title":"Connect!!",
                   "webview_height_ratio": "full"
                 }
