@@ -38,7 +38,7 @@ app.post('/webhook', (req, res) => {
         let sender_psid = webhook_event.sender.id;
 
         //TODO: to see whether the user already connects to the google calendar
-        checkUser(sender_psid);
+        //checkUser(sender_psid);
 
         if (webhook_event.message) {
             //handleMessage(sender_psid, webhook_event.message);
