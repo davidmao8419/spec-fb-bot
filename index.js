@@ -112,7 +112,7 @@ app.get('/connect/callback', function(req, res) {
             email: tempEmail,
             pendingInvites: []
         });
-        newUser.save()
+        newUser.save() 
                     .then( () => {
                         res.status(200).send("Your account was successfuly authenticated");
                         sendMsg(auth_id.auth_id, "You successfully connect to Google Calendar! Now I will remind you 7am everyday!");
