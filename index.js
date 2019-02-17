@@ -103,7 +103,7 @@ app.get('/connect/callback', function(req, res) {
           let auth_id = JSON.parse(decodeURIComponent(req.query.state));
           var newUser = new User({
             token: tokens, 
-            //facebookID: facebookID, //TODO: ALSO store slackname so that you can easily add your own meetings to your calendars too
+            facebookID: facebookID, //TODO: ALSO store slackname so that you can easily add your own meetings to your calendars too
             auth_id: auth_id.auth_id,
             email: tempEmail,
             pendingInvites: []
@@ -150,7 +150,26 @@ app.get('/connect/callback', function(req, res) {
       }
     }); 
   }
-
+/*
+  function checkUser(facebookID) {
+    User.findOne({slackID: slackID}).exec(function(err, user){
+      if(err){
+          console.log(err)
+      } else {
+          console.log(user);
+      if(!user){
+          authenticate(slackID);
+      } else {
+          console.log("message,", message);
+          bot.postMessage(message.user, MESSAGE, {as_user:true});
+          if(message.text && message.text.toLowerCase().includes('calendar')){
+              oneTimeCheck(user, true);
+          }
+      }
+      }
+  })
+  }
+*/
   function linkSuccessMessage(sender_psid, received_message) {
     var response = {
       "text": received_message
