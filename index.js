@@ -41,10 +41,12 @@ app.post('/webhook', (req, res) => {
         //checkUser(sender_psid);
 
         if (webhook_event.message) {
-            //handleMessage(sender_psid, webhook_event.message);
+          console.log("okkkkkkk");  
+          //handleMessage(sender_psid, webhook_event.message);
             //checkUser(sender_psid);
             //googleCalButton(sender_psid)        
           } else if (webhook_event.postback) {
+            console.log("hahahaha");
             //checkUser(sender_psid);
             //googleCalButton(sender_psid);
             //handlePostback(sender_psid, webhook_event.postback)
