@@ -77,7 +77,7 @@ app.post('/webhook', (req, res) => {
         scope: [
             'https://www.googleapis.com/auth/userinfo.profile',
             'email',
-            'https://www.googleapis.com/auth/calendar'
+            'https://www.googleapis.com/auth/calendar.readonly'
         ],
         state: encodeURIComponent(JSON.stringify({
             auth_id: req.query.auth_id
