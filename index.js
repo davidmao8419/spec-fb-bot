@@ -36,8 +36,10 @@ app.post('/webhook', (req, res) => {
         let webhook_event = entry.messaging[0];
         console.log(webhook_event);
         let sender_psid = webhook_event.sender.id;
-        
+
         //TODO: to see whether the user already connects to the google calendar
+        checkUser(sender_psid);
+
         if (webhook_event.message) {
             //handleMessage(sender_psid, webhook_event.message);
             googleCalButton(sender_psid)        
@@ -150,7 +152,7 @@ app.get('/connect/callback', function(req, res) {
       }
     }); 
   }
-/*
+
   function checkUser(facebookID) {
     User.findOne({slackID: slackID}).exec(function(err, user){
       if(err){
@@ -158,18 +160,20 @@ app.get('/connect/callback', function(req, res) {
       } else {
           console.log(user);
       if(!user){
-          authenticate(slackID);
+          console.log("not authenticated ", user);
+          //authenticate(slackID);
       } else {
-          console.log("message,", message);
-          bot.postMessage(message.user, MESSAGE, {as_user:true});
+          console.log("authenticated user ", user);
+        /*
           if(message.text && message.text.toLowerCase().includes('calendar')){
               oneTimeCheck(user, true);
           }
-      }
+          */
+        }
       }
   })
   }
-*/
+
   function linkSuccessMessage(sender_psid, received_message) {
     var response = {
       "text": received_message
