@@ -154,7 +154,7 @@ app.get('/connect/callback', function(req, res) {
   }
 
   function checkUser(facebookID) {
-    User.findOne({slackID: slackID}).exec(function(err, user){
+    User.findOne({facebookID: facebookID}).exec(function(err, user){
       if(err){
           console.log(err)
       } else {
