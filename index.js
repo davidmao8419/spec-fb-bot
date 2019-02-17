@@ -10,6 +10,7 @@ const {google} = require('googleapis');
 var {User} = require('./models');
 const request = require('request');
 const BootBot = require('bootbot');
+require('./bot');
 var facebookID;
 var mongoose = require('mongoose');
 var FB_PAGE_TOKEN = process.env.FB_PAGE_TOKEN;

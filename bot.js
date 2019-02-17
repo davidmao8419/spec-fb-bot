@@ -1,17 +1,20 @@
 'use strict';
+
+// Imports dependencies and set up http server
+const
+  express = require('express'),
+  bodyParser = require('body-parser'),
+  app = express().use(bodyParser.json()); // creates express http server
+
+const {google} = require('googleapis');
+var {User} = require('./models');
+const request = require('request');
 const BootBot = require('bootbot');
+var facebookID;
+var mongoose = require('mongoose');
+var FB_PAGE_TOKEN = process.env.FB_PAGE_TOKEN;
+mongoose.connect(process.env.MONGODB_URI,{ useNewUrlParser: true });
+mongoose.Promise = global.Promise;
 
-const bot = new BootBot({
-  accessToken: 'EAAFV6q1mQZCIBADaV5FCP43ih9c3ZAtjDa8dHE81AlyDsF9ZCd2ycoDJn24ahaZBziyZCeaC491HagfsaKYBcwhWM3xgoquj8mqHh2O2WgyHuUsaHSWdHothSuZAHZCF9vkxDsGW3obalp3gHZCVrOdZAIZBmkF2I5GOydPZClntCXivJ0ouZAMJrxGOFAZBsLOxvy1pLMwSN6WTUGAZDZD',
-  verifyToken: 'testing',
-  appSecret: '1076a355abf1df7533250276d151be84'
-});
 
-bot.on('message', (payload, chat) => {
-  const text = payload.message.text;
-  console.log("??????????????????????????????");
-  //chat.say(`Echo: ${text}`);
-
-});
-
-bot.start();
+console.log("!!!!!!!!!!!!@@@@@@@@@@@@!!!!!!!!!!!!!@@@@@@@@@@@@@");
