@@ -42,17 +42,11 @@ app.post('/webhook', (req, res) => {
 
         if (webhook_event.message) {
           console.log("okkkkkkk");  
-          if(hasUser) {
-            console.log("user exists");
-          } else {
-            console.log
-          }
           //handleMessage(sender_psid, webhook_event.message);
-            //checkUser(sender_psid);
+            checkUser(sender_psid);
             //googleCalButton(sender_psid)        
           } else if (webhook_event.postback) {
-            console.log("hahahaha");
-            //checkUser(sender_psid);
+            checkUser(sender_psid);
             //googleCalButton(sender_psid);
             //handlePostback(sender_psid, webhook_event.postback)
           }
@@ -168,7 +162,6 @@ app.get('/connect/callback', function(req, res) {
       if(!user){
           //console.log("not authenticated ", user);
           googleCalButton(facebookID);
-          return false;
       } else {
         sendMsg(facebookID, "You've already connected to Google Calendar! Reminders for every day's events will come in 7 am.");
         /*
@@ -176,7 +169,6 @@ app.get('/connect/callback', function(req, res) {
               oneTimeCheck(user, true);
           }
           */
-         return true;
         }
       }
   })
