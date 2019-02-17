@@ -102,7 +102,7 @@ app.get('/connect/callback', function(req, res) {
           var tempEmail = person.data.emails[0].value;
           let auth_id = JSON.parse(decodeURIComponent(req.query.state));
           var newUser = new User({
-            token: tokens,
+            token: tokens, 
             //facebookID: facebookID, //TODO: ALSO store slackname so that you can easily add your own meetings to your calendars too
             auth_id: auth_id.auth_id,
             email: tempEmail,
