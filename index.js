@@ -160,7 +160,7 @@ app.get('/connect/callback', function(req, res) {
       } else {
       if(!user){
           //console.log("not authenticated ", user);
-          googleCalButton(sender_psid);
+          googleCalButton(facebookID);
       } else {
         sendMsg(facebookID, "You've already connected to Google Calendar! Reminders for every day's events will come in 7 am.");
         /*
