@@ -38,7 +38,7 @@ app.post('/webhook', (req, res) => {
         let sender_psid = webhook_event.sender.id;
 
         //TODO: to see whether the user already connects to the google calendar
-        let hasUser = checkUser(sender_psid);
+        //checkUser CANNOT added here!!!!!! will cause infinite loop
 
         if (webhook_event.message) {
           console.log("okkkkkkk");  
