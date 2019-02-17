@@ -42,9 +42,11 @@ app.post('/webhook', (req, res) => {
 
         if (webhook_event.message) {
             //handleMessage(sender_psid, webhook_event.message);
-            googleCalButton(sender_psid)        
+            checkUser(sender_psid);
+            //googleCalButton(sender_psid)        
           } else if (webhook_event.postback) {
-            googleCalButton(sender_psid);
+            checkUser(sender_psid);
+            //googleCalButton(sender_psid);
             //handlePostback(sender_psid, webhook_event.postback)
           }
         
@@ -113,15 +115,13 @@ app.get('/connect/callback', function(req, res) {
         newUser.save()
                     .then( () => {
                         res.status(200).send("Your account was successfuly authenticated");
-                        linkSuccessMessage(auth_id.auth_id, "You successfully connect to Google Calendar! Now I will remind you 7am everyday!");
+                        sendMsg(auth_id.auth_id, "You successfully connect to Google Calendar! Now I will remind you 7am everyday!");
                         //rtm.sendMessage("You've successfully connect to your Google calendar", channelID)
                     })
                     .catch((err) => {
                         console.log('error in newuser save of connectcallback');
                         res.status(400).json({error:err});
                     });
-          console.log("!!!!!!! facebookID: ", facebookID);
-          console.log("!!!!!!! auth_id: ", auth_id.auth_id);
         }
       });
     }
@@ -158,12 +158,11 @@ app.get('/connect/callback', function(req, res) {
       if(err){
           console.log(err)
       } else {
-          console.log(user);
       if(!user){
-          console.log("not authenticated ", user);
-          //authenticate(slackID);
+          //console.log("not authenticated ", user);
+          googleCalButton(sender_psid);
       } else {
-          console.log("authenticated user ", user);
+        sendMsg(facebookID, "You've already connected to Google Calendar! Reminders for every day's events will come in 7 am.");
         /*
           if(message.text && message.text.toLowerCase().includes('calendar')){
               oneTimeCheck(user, true);
@@ -174,7 +173,7 @@ app.get('/connect/callback', function(req, res) {
   })
   }
 
-  function linkSuccessMessage(sender_psid, received_message) {
+  function sendMsg(sender_psid, received_message) {
     var response = {
       "text": received_message
     }
